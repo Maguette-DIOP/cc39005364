@@ -1,18 +1,24 @@
 package cc39005364.q1;
 
 public class FileSerializer implements Serializer{
+    private String name;
+    public FileSerializer(){}
     @Override
-    public void name() {
+    public String name(String name) {
+        return name(name);
+    }
 
+    public FileSerializer(String name) {
+        this.name = name;
     }
 
     @Override
-    public void size() {
-
+    public int size(String name) {
+        return name(name).length();
     }
 
     @Override
-    public void write() {
-
+    public String write(String chaine) {
+        return write(chaine);
     }
 }

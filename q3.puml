@@ -1,0 +1,90 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+ enum ComposantType {
+            INTRODUCTION, CHAPITRE, CONCLUSION,
+            BIbliOGRAPHIE, RESUME, REMERCIEMENT
+        }
+
+        interface IComposite<T> #MistyRose {
+           add(child: T): void
+           remove(index: integer): void
+           size(): integer
+        }
+         class Composite<T>{
+             - titre: string<<final>>
+             - auteur: String
+             --
+             ~ this(titre: string,auteur:string,introduction:Introduction,conclusion:CONCLUSION): <T>
+             --
+             add(child: T): void
+             remove(index: integer): void
+             size(): integer
+             ..
+             toString(): string
+         }
+         IComposite <|.. Composite
+
+         class Introduction #MistyRose {
+              --
+              ~ this(titre: string,auteur:string): Introduction
+              ..
+              + toString(): string
+          }
+            Composite <|-- Introduction
+            IComposite <|.. Introduction
+
+           class Chapitre #MistyRose {
+               --
+                ~ this(titre: string,auteur:string): Chapitre
+                 ..
+                 + toString(): string
+           }
+           Composite <|-- Chapitre
+           IComposite <|.. Chapitre
+         class Conclusion #MistyRose {
+                      --
+                      ~ this(titre: string,auteur:string): Conclusion
+                      ..
+                      + toString(): string
+                  }
+           Composite <|-- Conclusion
+           IComposite <|.. Conclusion
+         class Bibliographie #MistyRose {
+                       --
+                       ~ this(titre: string,auteur:string): Bibliographie
+                       ..
+                       + toString(): string
+                   }
+           Composite <|-- Bibliographie
+           IComposite <|.. Bibliographie
+          class Resume #MistyRose {
+                       --
+                       ~ this(titre: string,auteur:string): Resume
+                       ..
+                       + toString(): string
+                   }
+           Composite <|-- Resume
+            IComposite <|.. Resume
+       class Remerciement #MistyRose {
+                 --
+                 ~ this(titre: string,auteur:string): Remerciement
+                 ..
+                  + toString(): string
+       }
+         Composite <|-- Remerciement
+        IComposite <|.. Remerciement
+
+
+        class FSFactory <<Factory, Singleton>> #TECHNOLOGY {
+            + {static} INSTANCE: FSFactory = new FSFactory() <<final>>
+            - this(): FSFactory
+            + {static} getInstance(): FSFactory
+            + createComposant(type: ComposantType, titre: string): Composite
+        }
+        FSFactory ..> Composite : <<creates>>
+        FSFactory ..> ComposantType
+
+
+
+@enduml

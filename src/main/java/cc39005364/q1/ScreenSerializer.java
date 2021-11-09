@@ -1,18 +1,27 @@
 package cc39005364.q1;
 
 public class ScreenSerializer implements Serializer{
-    @Override
-    public void name() {
+    public String name;
 
+    public ScreenSerializer(String name) {
+        this.name = name;
     }
 
     @Override
-    public void size() {
-
+    public String name(String name) {
+        return name(name);
     }
 
     @Override
-    public void write() {
+    public int size(String name) {
+        return name(name).length();
+    }
 
+    public ScreenSerializer() {
+    }
+
+    @Override
+    public String write(String chaine) {
+        return write(chaine);
     }
 }
